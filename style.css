@@ -1,0 +1,24 @@
+body {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    background-color: rgba(97, 128, 17, 0.555);
+}
+#inp {
+    width: 45px;
+    height: 20px;
+    margin-top: 7px;
+    border-radius: 2px;
+    border: none;
+
+}
+.cal-btn {
+    width: auto;
+    height: 41px;
+    margin-left: 0.3rem;
+}
+div.input-field {
+    background-color: rgba(66, 58, 133, 0.09);
+    width: 20rem;
+    height: 41px;
+}
