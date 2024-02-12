@@ -3,7 +3,10 @@ const monthInp = document.querySelector('.month');
 const yearInp = document.querySelector('.year');
 const calBtn = document.querySelector('.js-cal-btn');
 const result = document.querySelector('.js-result');
-
+const logButton = document.querySelector('.js-log-btn');
+const logData = document.querySelector('.data');
+const clearLogBtn = document.querySelector('.js-clear-log-btn');
+let permission = false;
 function calculateAge(day, month, year) {
     const today = new Date();
     const birthDate = new Date(year, month - 1, day);
@@ -26,8 +29,9 @@ function calculateAge(day, month, year) {
         const tempDate = new Date(today.getFullYear(), today.getMonth(), 0);
         ageDays = tempDate.getDate() - birthDate.getDate() + today.getDate();
     }
-
+    storeData(day,month,year);
     return { years: ageYears, months: ageMonths, days: ageDays };
+
 }
 
 // Example usage
@@ -38,21 +42,36 @@ function calculateAge(day, month, year) {
 // const age = calculateAge(day, month, year);
 // console.log("Age:", age.years, "years", age.months, "months", age.days, "days");
 
+function storeData(day,month,year) {
+    const i = localStorage.length;
+    localStorage.setItem(`${i}.`, `${day}-${month}-${year}`);
+}
+function returnResult(day, month, year, permission) {
+    if(permission === true) {
+        let age = calculateAge(day, month , year);
+        result.innerHTML = `Your Age is : ${age.years} Year, ${age.months} Month, ${age.days} Days.`;
 
-function returnResult(day, month, year) {
-    let age = calculateAge(day, month , year);
-    result.innerHTML = `Your Age is : ${age.years} Year, ${age.months} Month, ${age.days} Days.`;
+    }
 }
 function checkInputs(day, month, year) {
     if(day > 31 || day < 1) {
+        permission = false;
         alert('Enter valid Date!');
         dateInp.innerHTML = "";
+        
     }
     if(month > 12 || month < 1) {
+        permission = false;
         alert('Enter valid Month!');
+        
     }
     if(year.length > 4 || year.length < 4) {
+        permission = false;
         alert('Enter valid Year!');
+
+    }
+    else {
+        permission = true;
     }
 }
 calBtn.addEventListener('click', ()=>{
@@ -61,5 +80,40 @@ calBtn.addEventListener('click', ()=>{
     const year = yearInp.value;
     checkInputs(day, month, year);
     
-    returnResult(day,month,year);
+    returnResult(day,month,year,permission);
+    //console.log(localStorage);
+});
+const admin_password = "69";
+function isAdmin(pass) {
+    return pass === admin_password?true:false;
+
+}
+clearLogBtn.addEventListener('click', ()=>{
+    const pass = prompt("Enter Admin Password:");
+    if(isAdmin(pass)) {
+        localStorage.clear();
+        logData.innerHTML = '';
+    }
+    else {
+        alert('Invalid password!');
+    }
+});
+logButton.addEventListener('click', ()=>{
+    const pass = prompt("Enter Admin Password:");
+    if(isAdmin(pass)) {
+        if(localStorage.length > 0) {
+            for(let i = 0; i< localStorage.length; i++) {
+                const p = document.createElement('p');
+                p.innerHTML = `${localStorage.getItem(i+'.')}`;
+                logData.appendChild(p);
+            }
+        }else {
+            logData.innerHTML = 'No data found.';
+        }
+        
+    }else {
+        alert('Invalid password!');
+    }
+
+    
 });

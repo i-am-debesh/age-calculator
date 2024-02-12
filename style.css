@@ -2,7 +2,8 @@ body {
     display: flex;
     text-align: center;
     justify-content: center;
-    background-color: rgba(97, 128, 17, 0.555);
+    background-color: rgba(54, 17, 128, 0.555);
+    font-family: cursive;
 }
 #inp {
     width: 45px;
@@ -16,9 +17,16 @@ body {
     width: auto;
     height: 41px;
     margin-left: 0.3rem;
+    margin-top: 10px;
+    font-family: cursive;
 }
 div.input-field {
     background-color: rgba(66, 58, 133, 0.09);
     width: 20rem;
     height: 41px;
+}
+
+.container {
+    margin-top: 200px;
+    background-color: rgb(207, 194, 210);
 }
