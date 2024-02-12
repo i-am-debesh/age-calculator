@@ -26,6 +26,11 @@ div.input-field {
     height: 41px;
 }
 
+div.data {
+    font-size: 9px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 .container {
     margin-top: 200px;
     background-color: rgb(207, 194, 210);

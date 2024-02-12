@@ -7,6 +7,9 @@ const logButton = document.querySelector('.js-log-btn');
 const logData = document.querySelector('.data');
 const clearLogBtn = document.querySelector('.js-clear-log-btn');
 let permission = false;
+
+
+
 function calculateAge(day, month, year) {
     const today = new Date();
     const birthDate = new Date(year, month - 1, day);
@@ -29,7 +32,10 @@ function calculateAge(day, month, year) {
         const tempDate = new Date(today.getFullYear(), today.getMonth(), 0);
         ageDays = tempDate.getDate() - birthDate.getDate() + today.getDate();
     }
-    storeData(day,month,year);
+
+    const currentLog = `${day}-${month}-${year} -> ${today.getHours()}:${today.getMinutes()}:${today.getSeconds()} -> Age- ${ageYears}`;
+    
+    storeData(currentLog);
     return { years: ageYears, months: ageMonths, days: ageDays };
 
 }
@@ -42,9 +48,9 @@ function calculateAge(day, month, year) {
 // const age = calculateAge(day, month, year);
 // console.log("Age:", age.years, "years", age.months, "months", age.days, "days");
 
-function storeData(day,month,year) {
+function storeData(currentLog) {
     const i = localStorage.length;
-    localStorage.setItem(`${i}.`, `${day}-${month}-${year}`);
+    localStorage.setItem(`${i}`,`${currentLog}`);
 }
 function returnResult(day, month, year, permission) {
     if(permission === true) {
@@ -104,7 +110,7 @@ logButton.addEventListener('click', ()=>{
         if(localStorage.length > 0) {
             for(let i = 0; i< localStorage.length; i++) {
                 const p = document.createElement('p');
-                p.innerHTML = `${localStorage.getItem(i+'.')}`;
+                p.innerHTML = `${localStorage.getItem(i)}`;
                 logData.appendChild(p);
             }
         }else {
