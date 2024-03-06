@@ -8,7 +8,11 @@ const logData = document.querySelector('.data');
 const clearLogBtn = document.querySelector('.js-clear-log-btn');
 let permission = false;
 
-
+function isSpecialDate(day,month,year) {
+    if(day == 6 && month == 5 && year == 2003) {
+        return true;
+    }return false;
+}
 
 function calculateAge(day, month, year) {
     const today = new Date();
@@ -85,7 +89,9 @@ calBtn.addEventListener('click', ()=>{
     const month = monthInp.value;
     const year = yearInp.value;
     checkInputs(day, month, year);
-    
+    if(isSpecialDate(day,month,year)) {
+        alert(`It's GULUGULU's Birth Date ♥ !`);
+    }
     returnResult(day,month,year,permission);
     //console.log(localStorage);
 });
