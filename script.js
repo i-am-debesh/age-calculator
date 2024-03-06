@@ -9,7 +9,7 @@ const clearLogBtn = document.querySelector('.js-clear-log-btn');
 let permission = false;
 
 function isSpecialDate(day,month,year) {
-    if(day == 6 && month == 5 && year == 2003) {
+    if(day == 6 && month == 9 && year == 2003) {
         return true;
     }return false;
 }
